@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter Translator</title>
+</head>
+<body>
+  <h1>Letter Translator</h1>
+  
+  <h2>Forward Translation</h2>
+  <input type="text" id="inputText" placeholder="Enter text to translate">
+  <button onclick="translateAndDisplay()">Translate</button>
+  <p>Translated text: <span id="outputText"></span></p>
+
+  <h2>Reverse Translation</h2>
+  <input type="text" id="reverseInputText" placeholder="Enter text to reverse-translate">
+  <button onclick="reverseTranslateAndDisplay()">Translate</button>
+  <p>Translated text: <span id="reverseOutputText"></span></p>
+
+  <script>
+    const letterMapping = {
+      'A': 'J', 'B': 'O', 'C': 'H', 'D': 'T', 'E': 'K', 'F': 'Z', 'G': 'Q', 'H': 'C', 'I': 'A', 'J': 'N', 'K': 'D', 'L': 'F', 'M': 'G', 'N': 'U', 'O': 'Y', 'P': 'L', 'Q': 'V', 'R': 'I', 'S': 'W', 'T': 'P', 'U': 'B', 'V': 'M', 'W': 'R', 'X': 'E', 'Y': 'X', 'Z': 'S',
+      'a': 'j', 'b': 'o', 'c': 'h', 'd': 't', 'e': 'k', 'f': 'z', 'g': 'q', 'h': 'c', 'i': 'a', 'j': 'n', 'k': 'd', 'l': 'f', 'm': 'g', 'n': 'u', 'o': 'y', 'p': 'l', 'q': 'v', 'r': 'i', 's': 'w', 't': 'p', 'u': 'b', 'v': 'm', 'w': 'r', 'x': 'e', 'y': 'x', 'z': 's',
+    };
+
+    function translateText(inputText) {
+      let translatedText = '';
+
+      for (let i = 0; i < inputText.length; i++) {
+        const currentChar = inputText.charAt(i);
+        translatedText += letterMapping[currentChar] || currentChar;
+      }
+
+      return translatedText;
+    }
+
+    function translateAndDisplay() {
+      const inputElement = document.getElementById('inputText');
+      const outputElement = document.getElementById('outputText');
+      const inputText = inputElement.value;
+      const translatedText = translateText(inputText);
+      outputElement.textContent = translatedText;
+    }
+
+    const reversedLetterMapping = {};
+    for (const key in letterMapping) {
+      reversedLetterMapping[letterMapping[key]] = key;
+    }
+
+    function reverseTranslateText(inputText) {
+      let translatedText = '';
+
+      for (let i = 0; i < inputText.length; i++) {
+        const currentChar = inputText.charAt(i);
+        translatedText += reversedLetterMapping[currentChar] || currentChar;
+      }
+
+      return translatedText;
+    }
+
+    function reverseTranslateAndDisplay() {
+      const inputElement = document.getElementById('reverseInputText');
+      const outputElement = document.getElementById('reverseOutputText');
+      const inputText = inputElement.value;
+      const translatedText = reverseTranslateText(inputText);
+      outputElement.textContent = translatedText;
+    }
+  </script>
+</body>
+</html>
